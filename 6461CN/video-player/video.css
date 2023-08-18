@@ -1,0 +1,24 @@
+mark {
+    font-weight: bold;
+  }
+  video {
+    border: 5px solid gray;
+  }
+  .mirror {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+  }
+  .leftside {
+    display: inline-block;
+    padding-right: 20px;
+  }
+  .rightside {
+    display: inline-block;
+    padding-left: 20px;
+    border-left: 1px solid #eee;
+  }
+  
