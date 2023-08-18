@@ -1,0 +1,35 @@
+Worker 1 is assigned chunk info [2103956, 1] ../../Combined_Flights_2021.csv
+Worker slave 1 is done. Sending back to master
+Worker 2 is assigned chunk info [2103957, 2103957] ../../Combined_Flights_2021.csv
+Worker slave 2 is done. Sending back to master
+received from Worker slave 1
+received from Worker slave 2
+received from Worker slave 3
+                                            0     1
+0                      Southwest Airlines Co.  2326
+1                      American Airlines Inc.   759
+2                           Republic Airlines   704
+3                       United Air Lines Inc.   633
+4                             JetBlue Airways   487
+5    GoJet Airlines, LLC d/b/a United Express   428
+6                            Spirit Air Lines   316
+7                       SkyWest Airlines Inc.   297
+8                        Delta Air Lines Inc.   295
+9                 Air Wisconsin Airlines Corp   286
+10                                Comair Inc.   202
+11  Commutair Aka Champlain Enterprises, Inc.   202
+12                         Mesa Airlines Inc.   160
+13                                  Envoy Air   135
+14                Capital Cargo International   132
+15                       Alaska Airlines Inc.   127
+16                          Endeavor Air Inc.    80
+17                     Frontier Airlines Inc.    79
+18                              Allegiant Air    50
+19                                Horizon Air    42
+20                     Hawaiian Airlines Inc.    36
+0    Southwest Airlines Co.
+1                      2326
+Name: 18, dtype: object
+time taken with 3 slaves (MPI execution): 20.53 second(s)
+Worker 3 is assigned chunk info [None, 4207914] ../../Combined_Flights_2021.csv
+Worker slave 3 is done. Sending back to master

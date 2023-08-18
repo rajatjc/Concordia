@@ -1,0 +1,225 @@
+Name		IP Addr		Port	
+T1_server  	172.17.0.2	65432
+T1_client01	172.17.0.3	50518
+T1_client02	172.17.0.4	38214
+T1_client03	172.17.0.5	35756
+
+Server Section
+
+1)rajat@rajat:~$ docker run --name T1_server --mount type=bind,source=/home/rajat/sheesh/DSD6231/Lab/Assignments/Assignment1/COMP6231_assignment_1_client_server,target=/T1_files --shm-size 2GB -it python bash
+2)root@0033182c6519:/# apt-get update
+3)root@0033182c6519:/# apt-get install nano net-tools iputils-ping
+4)root@0033182c6519:/# cd T1_files/
+5)root@0033182c6519:/T1_files# cd server/
+6)root@0033182c6519:/T1_files/server# nano server.py
+7)root@0033182c6519:/T1_files/server# python server.py 
+
+Server Logs
+Connected by ('172.17.0.3', 50518)
+Connection from :  ('172.17.0.3', 50518)
+Connected by ('172.17.0.4', 38214)
+Connection from :  ('172.17.0.4', 38214)
+Connected by ('172.17.0.5', 35756)
+Connection from :  ('172.17.0.5', 35756)
+
+
+8)root@0033182c6519:/T1_files/server# apt install tree
+9)root@0033182c6519:/T1_files/server# tree -L 3
+.
+├── client01
+│   └── orca.jpg
+├── client02
+│   └── jellyfish.jpg
+├── client03
+│   └── taco_bell.mp3
+├── example.py
+└── server.py
+
+3 directories, 5 files
+
+
+
+
+
+
+Client Section01
+10)rajat@rajat:~$ docker run --name T1_client01 --mount type=bind,source=/home/rajat/sheesh/DSD6231/Lab/Assignments/Assignment1/COMP6231_assignment_1_client_server,target=/T1_files --shm-size 2GB -it python bash
+11)root@f86009edcad8:/# apt-get update
+12)root@f86009edcad8:/# apt-get install nano net-tools iputils-ping
+13)root@f86009edcad8:/# cd T1_files/
+14)root@f86009edcad8:/T1_files# cd client/
+15)root@f86009edcad8:/T1_files/client# nano client.py
+16)root@f86009edcad8:/T1_files/client# python client.py 
+
+Client01 Logs
+Connected to server at IP: 172.17.0.2 and Port: 65432
+Handshake Done.Client Section01 EOF is: <yVPKpVUe>
+Current Directory: /T1_files/server:
+|
+-- 
+-- example.py
+-- server.py
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>mkdir client01
+========================================================================================
+Current Directory: /T1_files/server:
+|
+-- client01
+-- example.py
+-- server.py
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>cd client01
+========================================================================================
+Current Directory: /T1_files/server/client01:
+|
+-- 
+-- 
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>ul orca.jpg   
+========================================================================================
+Current Directory: /T1_files/server/client01:
+|
+-- 
+-- orca.jpg
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>cd ..
+========================================================================================
+Current Directory: /T1_files/server:
+|
+-- client03
+-- client02
+-- client01
+-- example.py
+-- server.py
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>dl example.py
+========================================================================================
+Current Directory: /T1_files/server:
+|
+-- client03
+-- client02
+-- client01
+-- example.py
+-- server.py
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>rm example.py
+========================================================================================
+Current Directory: /T1_files/server:
+|
+-- client03
+-- client02
+-- client01
+-- server.py
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>ul example.py
+========================================================================================
+Current Directory: /T1_files/server:
+|
+-- client03
+-- client02
+-- client01
+-- example.py
+-- server.py
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>exit
+========================================================================================
+Exiting the application.
+
+
+Client Section02
+17)rajat@rajat:~/Downloads/pycharm-2022.2.3/bin$ docker run --name T1_client02 --mount type=bind,source=/home/rajat/sheesh/DSD6231/Lab/Assignments/Assignment1/COMP6231_assignment_1_client_server,target=/T1_files --shm-size 2GB -it python bash
+18)root@21dd4a2d10ab:/# apt-get update
+19)root@21dd4a2d10ab:/# apt-get install iputils-ping nano net-tools
+20)root@21dd4a2d10ab:/T1_files# cd client/
+21)root@21dd4a2d10ab:/T1_files/client# nano client.py 
+22)root@21dd4a2d10ab:/T1_files/client# python client.py
+
+
+Client02 Logs
+Connected to server at IP: 172.17.0.2 and Port: 65432
+Handshake Done. EOF is: <3ptoejT7>
+Current Directory: /T1_files/server:
+|
+-- 
+-- example.py
+-- server.py
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>mkdir client02
+========================================================================================
+Current Directory: /T1_files/server:
+|
+-- client02
+-- client01
+-- example.py
+-- server.py
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>cd client02
+========================================================================================
+Current Directory: /T1_files/server/client02:
+|
+-- 
+-- 
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>ul jellyfish.jpg
+========================================================================================
+Current Directory: /T1_files/server/client02:
+|
+-- 
+-- jellyfish.jpg
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>exit
+========================================================================================
+Exiting the application.
+
+
+
+
+Client Section03
+23)rajat@rajat:~/Downloads/pycharm-2022.2.3/bin$ docker run --name T1_client03 --mount type=bind,source=/home/rajat/sheesh/DSD6231/Lab/Assignments/Assignment1/COMP6231_assignment_1_client_server,target=/T1_files --shm-size 2GB -it python bash
+24)root@c0e7ed4cc396:/# apt-get update
+25)root@c0e7ed4cc396:/# apt-get install nano net-tools iputils-ping
+26)root@c0e7ed4cc396:/# cd T1_files/client/
+27)root@c0e7ed4cc396:/T1_files/client# nano client.py
+28)root@c0e7ed4cc396:/T1_files/client# python client.py
+
+
+Client03 Logs
+Connected to server at IP: 172.17.0.2 and Port: 65432
+Handshake Done. EOF is: <NZurN0cP>
+Current Directory: /T1_files/server:
+|
+-- 
+-- example.py
+-- server.py
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>mkdir client03
+========================================================================================
+Current Directory: /T1_files/server:
+|
+-- client03
+-- client02
+-- client01
+-- example.py
+-- server.py
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>cd client03
+========================================================================================
+Current Directory: /T1_files/server/client03:
+|
+-- 
+-- 
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>ul taco_bell.mp3
+========================================================================================
+Current Directory: /T1_files/server/client03:
+|
+-- 
+-- taco_bell.mp3
+Choose a command: cd, mkdir, rm, ul, dl, exit
+>>>exit
+========================================================================================
+Exiting the application.
+
+
+
+

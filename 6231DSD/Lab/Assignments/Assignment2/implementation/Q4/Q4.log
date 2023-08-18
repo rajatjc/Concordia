@@ -1,0 +1,11 @@
+Worker 1 is assigned chunk info [2103956, 1] ../../Combined_Flights_2021.csv
+Worker slave 1 is done. Sending back to master
+Worker 2 is assigned chunk info [2103957, 2103957] ../../Combined_Flights_2021.csv
+Worker slave 2 is done. Sending back to master
+Worker 3 is assigned chunk info [None, 4207914] ../../Combined_Flights_2021.csv
+Worker slave 3 is done. Sending back to master
+received from Worker slave 1
+received from Worker slave 2
+received from Worker slave 3
+365
+time taken with 3 slaves (MPI execution): 27.19 second(s)

@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+{% block content2 %}
+
+
+  <main id="main">
+
+    <section class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+
+
+
+          <div class="col-lg-12">
+            <div class="portfolio-info">
+              <h3></h3>
+              <ul>
+                <li><strong>Movie </strong>: {{ data.0.movie }}</li>
+                <li><strong>Review Date</strong>: {{ data.0.review_date }}</li>
+                <li><strong>Reviewer Name</strong>: {{ data.0.reviewer }}</li>
+                <li><strong>Contains Spoiler</strong>: {{ data.0.spoiler_tag}}</li>
+                  <li><strong>Rating</strong>: {{ data.0.rating}}</li>
+
+              </ul>
+            </div>
+            <div class="portfolio-description">
+              <h2>{{ data.0.review_summary }}</h2>
+              <p>
+                {{ data.0.review_detail }}
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+    </section>
+  </main><!-- End #main -->
+
+
+
+{% endblock %}

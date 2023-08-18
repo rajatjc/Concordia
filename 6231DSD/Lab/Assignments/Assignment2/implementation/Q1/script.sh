@@ -1,0 +1,13 @@
+mpiexec -n 4 -machinefile ~/machinefile python -m mpi4py T3.py;
+mpiexec -n 5 -machinefile ~/machinefile python -m mpi4py T3.py;
+mpiexec -n 6 -machinefile ~/machinefile python -m mpi4py T3.py;
+mpiexec -n 7 -machinefile ~/machinefile python -m mpi4py T3.py;
+mpiexec -n 8 -machinefile ~/machinefile python -m mpi4py T3.py;
+mpiexec -n 9 -machinefile ~/machinefile python -m mpi4py T3.py;
+mpiexec -n 10 -machinefile ~/machinefile python -m mpi4py T3.py;
+mpiexec -n 11 -machinefile ~/machinefile python -m mpi4py T3.py;
+mpiexec -n 12 -machinefile ~/machinefile python -m mpi4py T3.py;
+mpiexec -n 13 -machinefile ~/machinefile python -m mpi4py T3.py;
+mpiexec -n 14 -machinefile ~/machinefile python -m mpi4py T3.py;
+mpiexec -n 15 -machinefile ~/machinefile python -m mpi4py T3.py;
+mpiexec -n 16 -machinefile ~/machinefile python -m mpi4py T3.py;

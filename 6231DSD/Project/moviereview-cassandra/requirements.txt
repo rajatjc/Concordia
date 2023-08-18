@@ -1,0 +1,10 @@
+cassandra-driver
+click
+Flask
+Flask-CQLAlchemy
+geomet
+itsdangerous
+Jinja2
+MarkupSafe
+six
+Werkzeug
