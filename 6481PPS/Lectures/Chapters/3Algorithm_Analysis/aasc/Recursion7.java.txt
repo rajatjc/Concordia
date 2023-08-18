@@ -1,0 +1,301 @@
+// *******************************************************************
+// Recursion7.java 
+// This program illustrates the complexity/efficiency of algorithms, 
+// and the "Big O" notation to obtain such complexity. The program also 
+// provides an iterative version of binary search as well as a 
+// "sequential search" version. 
+// 
+// Key Points:
+// 1) Big O Notation; O().
+// *******************************************************************
+
+import java.util.Scanner;
+
+
+
+public class Recursion7{
+	
+	private static int recursiveBinaryCtr = 0;
+	private static int iterativeBinaryCtr = 0;
+	private static int sequentialSearchCtr = 0;
+	
+	// A recursive method that uses binary search to find 
+	// a value in a sorted array. If the value is found, 
+	// its index is returned; otherwise, the method returns
+	// -1 as an indication that the value was not found in the array.
+	// The method expects an array of integers, a start index and 
+	// an end index for the search, and finally the value that the search is for
+	
+	public static int recursiveBinarysearch(int[] A, int startIndex, int endIndex, int v)		
+	{
+		recursiveBinaryCtr++; 
+		int foundIndex = -1, mid;		
+		
+		if(startIndex > endIndex )		// Stopping condition; search is exhausted 
+			return -1;					// without finding the value
+				
+		// Now find if the value is in the middle of the array
+		// and if it is not there, then on which part of the array
+		// it could be there, then search only that part
+		
+		mid = (startIndex + endIndex)/2;	// Find the middle index
+											// If the array has an odd number of elements
+											// that index is in the exact middle; otherwise 
+											// it is one of the middle two, which is okay
+		if(A[mid] == v )				
+		{						
+			System.out.print("\nThe value was found ......");
+			return mid;		// Return the index where the value was found
+		}
+		else				// Recursive Steps
+		{
+			if(v < A[mid])	// Value could only be in the left part of the array
+			{
+				System.out.print("\nWill search the array between index # " + startIndex + 
+						          " and index # " + (mid-1));
+				foundIndex = recursiveBinarysearch(A, startIndex, mid-1, v); 
+			}
+			else			// Value could only be in the right part of the array
+			{
+				System.out.print("\nWill search the array between index # " + (mid+1) + 
+									" and index # " + endIndex);
+				foundIndex = recursiveBinarysearch(A, mid+1, endIndex, v); 				
+			}
+		}
+		return foundIndex;
+	}
+  
+	
+	// This method will perform the same binary search as above but it utilizes 
+	// an iterative procedure instead of recursion
+	public static int iterativeBinarysearch(int[] A, int startIndex, int endIndex, int v)		
+	{
+		 
+		int mid, first, last, result = -1;		
+		Boolean found = false;
+		
+		first = startIndex;
+		last = endIndex;
+	
+		if(first > last )				
+			return -1;					
+
+		while((first <= last) && !found)
+		{
+			iterativeBinaryCtr++;		// Keep track of how many times the loop will go through
+			mid = (first + last)/2;
+			if(A[mid] == v )				
+			{						
+				System.out.print("\nThe value was found ......");
+				result = mid;		// Return the index where the value was found
+				found = true;
+			}
+			else if (v < A[mid])	// Value could only be in the left part of the array
+			{
+				last = mid-1; 
+			}
+			else if (v > A[mid])	// Value could only be in the right part of the array
+			{
+				first = mid+1; 
+			}
+		}
+
+		return result;
+	}
+  
+
+	
+	// This method will perform the same array search as above but it uses
+	// sequential search instead of binary search
+	public static int sequentialsearch(int[] A, int startIndex, int endIndex, int v)		
+	{
+		int result = -1;
+		for (int i = 0; i < A.length; i++)
+		{
+			sequentialSearchCtr++;
+			if (A[i] == v)
+			{
+				System.out.print("\nThe value was found ......");
+				result = i;
+				break;		// No need to continue searching the array
+			}
+		}
+		return result;
+	}
+
+	
+	
+	private static int getRecursiveBinaryCtr()
+	{
+		return recursiveBinaryCtr;
+	}
+	
+	private static int getIterativeBinaryCtr()
+	{
+		return iterativeBinaryCtr;
+	}
+	
+	private static int getSequentialSearchCtr()
+	{
+		return sequentialSearchCtr;
+	}
+	
+	public static void main(String[] args)
+  {
+    	 
+    	 Scanner kb = new Scanner (System.in);
+    	 int[] Arr = new int[25];
+    	 int val, result;
+    	 
+    	
+    	 // Just initialize the array; array must be sorted
+    	 Arr[0] = 12; Arr[1] = 14; Arr[2] = 28; Arr[3] = 31; 
+    	 Arr[4] = 35; Arr[5] = 48; Arr[6] = 50; Arr[7] = 51; 
+    	 Arr[8] = 57; Arr[9] = 64; Arr[10] = 68; Arr[11] = 75; 
+    	 Arr[12] = 82; Arr[13] = 84; Arr[14] = 94; Arr[15] = 98; 
+    	 Arr[16] = 104; Arr[17] = 201; Arr[18] = 245; Arr[19] = 277; 
+    	 Arr[20] = 284; Arr[21] = 296; Arr[22] = 401; Arr[23] = 458; 
+    	 Arr[24] = 581; 
+    	 
+    	 System.out.print("Please enter the value you wish to search for: ");
+    	 val = kb.nextInt();
+    	 
+    	 System.out.print("\nWill be utilizing Recursive Binary Search to look for the value.");
+    	 // Call the recursive method to find whether or not the value is in the array
+    	 // Initially, start the search over the entire array
+    	 System.out.print("\nInitial search will take place over the entire " +
+    	 					"array between index # 0 and index # " + (Arr.length-1));
+
+    	 result = recursiveBinarysearch(Arr, 0, Arr.length-1, val);
+    	 
+    	 if (result == -1)
+    		 System.out.println("\nValue " + val + " was not found in the array.");
+    	 else
+    		 System.out.println("\nValue " + val + " was found in the array at index # " + result);
+         
+    	 System.out.println("\nIt took " + getRecursiveBinaryCtr() + 
+    			           " times to search the array using Recursive Binary Search. ");
+    	 
+
+    	 
+    	 System.out.print("\nNow will be utilizing Iterative Binary Search to look for the value.");
+ 
+       result = iterativeBinarysearch(Arr, 0, Arr.length-1, val);
+   	 
+       if (result == -1)
+       	System.out.println("\nValue " + val + " was not found in the array.");
+       else
+       	System.out.println("\nValue " + val + " was found in the array at index # " + result);
+
+       System.out.println("\nIt took " + getIterativeBinaryCtr() + 
+       				" times to search the array using Iterative Binary Search. ");
+
+
+       	
+       	
+       System.out.println("\nNow will be utilizing Sequential Search to look for the value.");
+      	 
+       result = sequentialsearch(Arr, 0, Arr.length-1, val);
+    	 
+       if (result == -1)
+       		System.out.println("\nValue " + val + " was not found in the array.");
+       else
+        		System.out.println("\nValue " + val + " was found in the array at index # " + result);
+
+       System.out.println("\nIt took " + getSequentialSearchCtr() + 
+        				" times to search the array using Sequential Search. ");
+
+ }
+}
+
+
+
+/* The Output 
+Please enter the value you wish to search for: 401
+
+Will be utilizing Recursive Binary Search to look for the value.
+Initial search will take place over the entire array between index # 0 and index # 24
+Will search the array between index # 13 and index # 24
+Will search the array between index # 19 and index # 24
+Will search the array between index # 22 and index # 24
+Will search the array between index # 22 and index # 22
+The value was found ......
+Value 401 was found in the array at index # 22
+
+It took 5 times to search the array using Recursive Binary Search. 
+
+Now will be utilizing Iterative Binary Search to look for the value.
+The value was found ......
+Value 401 was found in the array at index # 22
+
+It took 5 times to search the array using Iterative Binary Search. 
+
+Now will be utilizing Sequential Search to look for the value.
+
+The value was found ......
+Value 401 was found in the array at index # 22
+
+It took 23 times to search the array using Sequential Search. 
+*/
+
+
+/* Run Again
+Please enter the value you wish to search for: 700
+
+Will be utilizing Recursive Binary Search to look for the value.
+Initial search will take place over the entire array between index # 0 and index # 24
+Will search the array between index # 13 and index # 24
+Will search the array between index # 19 and index # 24
+Will search the array between index # 22 and index # 24
+Will search the array between index # 24 and index # 24
+Will search the array between index # 25 and index # 24
+Value 700 was not found in the array.
+
+It took 6 times to search the array using Recursive Binary Search. 
+
+Now will be utilizing Iterative Binary Search to look for the value.
+Value 700 was not found in the array.
+
+It took 5 times to search the array using Iterative Binary Search. 
+
+Now will be utilizing Sequential Search to look for the value.
+
+Value 700 was not found in the array.
+
+It took 25 times to search the array using Sequential Search. 
+*/
+
+
+/* Run Again 
+Please enter the value you wish to search for: 35
+
+Will be utilizing Recursive Binary Search to look for the value.
+Initial search will take place over the entire array between index # 0 and index # 24
+Will search the array between index # 0 and index # 11
+Will search the array between index # 0 and index # 4
+Will search the array between index # 3 and index # 4
+Will search the array between index # 4 and index # 4
+The value was found ......
+Value 35 was found in the array at index # 4
+
+It took 5 times to search the array using Recursive Binary Search. 
+
+Now will be utilizing Iterative Binary Search to look for the value.
+The value was found ......
+Value 35 was found in the array at index # 4
+
+It took 5 times to search the array using Iterative Binary Search. 
+
+Now will be utilizing Sequential Search to look for the value.
+
+The value was found ......
+Value 35 was found in the array at index # 4
+
+It took 5 times to search the array using Sequential Search. 
+*/
+
+
+
+
+
+

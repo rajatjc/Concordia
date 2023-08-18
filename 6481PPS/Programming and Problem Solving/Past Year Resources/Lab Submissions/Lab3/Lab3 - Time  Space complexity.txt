@@ -1,0 +1,5 @@
+Problem A :
+Time complexity is O(n^2) & Space complexity is O(n)
+
+Problem B :
+Time complexity is O(n) & Space complexity is O(1)
