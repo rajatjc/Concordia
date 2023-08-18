@@ -1,0 +1,1 @@
+In the python language, the expression [[34, house, 14], [administation, 123, cat]] represents a structure called a list, while the expression (dog, 26, apple, (age, 76)) is a tuple. Cool, eh?

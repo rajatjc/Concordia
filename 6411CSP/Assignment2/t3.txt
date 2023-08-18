@@ -1,0 +1,45 @@
+Can you believe it? The price of the new iPhone XS has increased by $200. I saw the announcement on their official website (first). It's available for pre-order now. Hurry up and grab yours before they run out of stock!
+Can you believe it? The price of the new iPhone XS has increased by $200. I saw the announcement on their official website (first). It ' s available for pre - order now. Hurry up and grab yours before they run out of stock!
+
+
+
+
+
+
+def decompress_file(encoded_text):
+    decompressed_text = []
+    compressed_words = encoded_text.split()
+    capitalize_next = True  # Flag to indicate if the next word should be capitalized
+
+    for compressed_word in compressed_words:
+        if compressed_word.startswith("@") and compressed_word.endswith("@") and compressed_word != "@":
+            decompressed_word = compressed_word[1:-1]
+        elif is_number(compressed_word):
+            position = int(compressed_word)
+            words = list(word_positions.keys())
+            decompressed_word = words[position] if position < len(words) else compressed_word
+        else:
+            decompressed_word = compressed_word
+
+        capitalized_word = decompressed_word.capitalize() if capitalize_next else decompressed_word
+        decompressed_text.append(capitalized_word)
+
+        if decompressed_word.endswith(('.', '!', '?')):
+            capitalize_next = True
+        else:
+            capitalize_next = False
+
+    decompressed_text = " ".join(decompressed_text)
+    # Characters to add spaces before
+    characters = [',', '.', '?', '!', ')', ']', '@', '$', '(', '[']
+
+    # Add spaces before characters
+    for char in characters:
+        if char in ['@', '$']:
+            decompressed_text = decompressed_text.replace(f'{char} ', char)
+        elif char in ['(', '[']:
+            decompressed_text = decompressed_text.replace(f' {char} ', f' {char}')
+        else:
+            decompressed_text = decompressed_text.replace(f' {char}', char)
+    return decompressed_text
+    
