@@ -1,0 +1,22 @@
+Paper Findings:
+
+k - number of minimum shared edges path we want (for our case should it be 2?)
+For k = 2 there is an algorithm
+
+There exists an algorithm to find k best paths when lambda(e) = 0, meaning there is no shared edge in the paths
+
+MSE - Minimum Shared Edges
+MECF - Minimum Edge-Cost Flow 
+
+Transformation of MSE to MECF for approximation
+
+let there be a graph G = (V, E), transform it to G' = (V', E') such that for all v belongs to V, v belongs to V'. Now for each edge e, create e1 and e2 such that cost(e1) = 0, capacity(e1) = 1, cost(e2) = 1, capacity(e2) = k - 1. Where k is the number of paths.
+
+Any solution of Cost L and Flow F on MECF will give the solution for MSE for shared edges L and Paths F
+
+Now any a-approximation for MECF will give an a-approximation for MSE  
+
+Approximation for MECF is based on MCF (minimum cost flow)
+
+MCF gives F-approximation to the problem which is K-approximation for MECF and MSE
+F => K

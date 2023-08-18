@@ -1,0 +1,303 @@
+InsertionSort(A):
+  n ← length(A)
+  for j ← 2 to n do
+    val ← A[j]
+    i ← j - 1
+    while i > 0 and A[i] > val do
+      A[i+1] ← A[i]
+      i ← i - 1
+    end while
+    A[i+1] ← val
+  end for
+end function
+
+
+MergeSort(A, p, r):
+  if p < r then
+    q ← floor((p + r) / 2)
+    MergeSort(A, p, q)
+    MergeSort(A, q + 1, r)
+    Merge(A, p, q, r)
+  end if
+end function
+
+Initial call: MergeSort(A, 1, n)
+
+Merge(A, p, q, r):
+  n1 ← q - p + 1
+  n2 ← r - q
+  let L[1..n1+1] and R[1..n2+1] be new arrays
+  for i ← 1 to n1 do
+    L[i] ← A[p + i - 1]
+  end for
+  for j ← 1 to n2 do
+    R[j] ← A[q + j]
+  end for
+  L[n1+1] ← ∞
+  R[n2+1] ← ∞
+  i ← 1
+  j ← 1
+  for k ← p to r do
+    if L[i] ≤ R[j] then
+      A[k] ← L[i]
+      i ← i + 1
+    else
+      A[k] ← R[j]
+      j ← j + 1
+    end if
+  end for
+end function
+
+
+RECURSIVE FUNCTION MULTIPLY(X, Y)
+IF length(X) = 1
+RETURN X * Y
+ELSE
+// Split X and Y in half
+n = length(X)
+m = n / 2
+X_left = first m digits of X
+X_right = last n-m digits of X
+Y_left = first m digits of Y
+Y_right = last n-m digits of Y
+// Recursively compute subproblems
+R_left = MULTIPLY(X_left, Y_left)
+R_right = MULTIPLY(X_right, Y_right)
+R_cross = MULTIPLY(X_left + X_right, Y_left + Y_right) - R_left - R_right
+// Combine subproblems
+W = R_left * 10^(2*(n-m)) + R_cross * 10^m + R_right
+RETURN W
+
+// Initial call
+RETURN MULTIPLY(X, Y)
+
+
+Fib
+
+Create a global array F with n+1 entries and initialize all entries to -1 (indicating that they have not been computed yet).
+Set F[0] and F[1] to 1, since these are the base cases of the Fibonacci sequence.
+For i in the range 2 to n, do the following:
+Set F[i] to the sum of F[i-1] and F[i-2], since this is the recursive definition of the Fibonacci sequence.
+Return F[n], which is the nth Fibonacci number.
+
+
+MaxIncreasingSubsequence(A):
+    n = length(A)
+    D = [0] * n
+
+    for i = 0 to n-1 do
+        m = 0
+        for j = 0 to i-1 do
+            if A[j] < A[i] and D[j] > m then
+                m = D[j]
+            end if
+        end for
+        D[i] = 1 + m
+    end for
+
+    return max(D)
+end function
+
+
+def longest_increasing_subsequence(A):
+    n = len(A)
+    D = [0] * n
+    prev = [i for i in range(n)]
+
+    for i in range(n):
+        m = 0
+        for j in range(i):
+            if A[j] < A[i] and D[j] > m:
+                m = D[j]
+                prev[i] = j
+        D[i] = 1 + m
+
+    result = []
+    idx = D.index(max(D))
+    while idx != prev[idx]:
+        result.append(idx)
+        idx = prev[idx]
+    result.append(idx)
+    result.reverse()
+
+    return result
+    
+    The given algorithm appears to be trying to find the majority element in an array, i.e., the element that occurs more than n/2 times, where n is the length of the array.
+
+The algorithm uses recursion to divide the input array into two halves and recursively applies itself on the left and right halves. If the left and right halves have the same majority element, that element is returned. If not, the algorithm counts the occurrences of the left and right majority elements in the original array and returns the element with the majority count. If there is no majority element, it returns None.
+
+The correctness of the algorithm can be proved using the following steps:
+
+Base case: If the input array has only one element, that element is returned as the majority element. This is correct since it is the only element and therefore occurs more than n/2 times (where n = 1).
+
+Base case: If the input array has only two elements, the algorithm checks if they are the same. If they are, that element is returned as the majority element. Otherwise, there is no majority element and None is returned. This is correct since the majority element must occur at least n/2 + 1 times, but in an array of length 2, the only possibility is that both elements occur once each.
+
+Recursive case: If the input array has more than two elements, the algorithm recursively applies itself on the left and right halves of the array. By induction, assume that the algorithm correctly identifies the majority element in the left and right halves, or returns None if there is no majority element.
+
+If the left and right halves have the same majority element, that element is returned. This is correct since the majority element must occur more than n/2 times in the entire array, and since both halves have the same majority element, it must occur more than n/2 times in the entire array as well.
+
+If the left and right halves have different majority elements, the algorithm counts the occurrences of these elements in the original array. If either element occurs more than n/2 times, it is returned as the majority element. This is correct since the majority element must occur more than n/2 times in the entire array, and if one of the elements occurs more than n/2 times in the original array, it must be the majority element.
+
+If neither element occurs more than n/2 times, None is returned. This is correct since there is no majority element in the entire array in this case.
+
+Therefore, the algorithm is correct. However, it is worth noting that the algorithm has a time complexity of O(n log n) due to the recursive calls, and a space complexity of O(log n) due to the call stack.
+    
+    
+    
+     Returns v if v is a majority;
+# otherwise, returns None
+def f(arr, low, high):
+  if low == high:
+    return arr[low]
+
+  if low + 1 == high:
+    return arr[low] if arr[low] == arr[high] else None
+
+  n = high - low + 1
+  mid = (low + high) / 2
+
+  l = f(arr, low, mid)
+  r = f(arr, mid + 1, high)
+
+  print 'n: ' + str(n) + '; l: ' + str(l) + '; r: ' + str(r) + '; L: ' + str((low, mid)) + '; R: ' + str((mid + 1, high))
+
+  if l == r:
+    return l
+
+  counts = [0, 0]
+
+  for i in xrange(low, high + 1):
+    if arr[i] == l:
+      counts[0] = counts[0] + 1
+    if arr[i] == r:
+      counts[1] = counts[1] + 1
+
+  if l and counts[0] * 2 > n:
+    return l
+
+  if r and counts[1] * 2 > n:
+    return r
+
+  return None
+  
+  
+  
+  // C++ program to find longest alternating
+// subsequence in an array
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function to return max of two numbers
+int max(int a, int b) { return (a > b) ? a : b; }
+
+// Function to return longest alternating
+// subsequence length
+int zzis(int arr[], int n)
+{
+
+	/*las[i][0] = Length of the longest
+		alternating subsequence ending at
+		index i and last element is greater
+		than its previous element
+	las[i][1] = Length of the longest
+		alternating subsequence ending
+		at index i and last element is
+		smaller than its previous element */
+	int las[n][2];
+
+	// Initialize all values from 1
+	for (int i = 0; i < n; i++)
+		las[i][0] = las[i][1] = 1;
+
+	// Initialize result
+	int res = 1;
+
+	// Compute values in bottom up manner
+	for (int i = 1; i < n; i++) {
+
+		// Consider all elements as
+		// previous of arr[i]
+		for (int j = 0; j < i; j++) {
+
+			// If arr[i] is greater, then
+			// check with las[j][1]
+			if (arr[j] < arr[i]
+				&& las[i][0] < las[j][1] + 1)
+				las[i][0] = las[j][1] + 1;
+
+			// If arr[i] is smaller, then
+			// check with las[j][0]
+			if (arr[j] > arr[i]
+				&& las[i][1] < las[j][0] + 1)
+				las[i][1] = las[j][0] + 1;
+		}
+
+		// Pick maximum of both values at index i
+		if (res < max(las[i][0], las[i][1]))
+			res = max(las[i][0], las[i][1]);
+	}
+	return res;
+}
+
+// Driver code
+int main()
+{
+	int arr[] = { 10, 22, 9, 33, 49, 50, 31, 60 };
+	int n = sizeof(arr) / sizeof(arr[0]);
+
+	cout << "Length of Longest alternating "
+		<< "subsequence is " << zzis(arr, n);
+
+	return 0;
+}
+
+// This code is contributed by shivanisinghss2110
+
+
+
+
+ems
+
+Follow the below steps to solve the problem:
+
+Let A is given an array of length N 
+We define a 2D array las[n][2] such that las[i][0] contains the longest alternating subsequence ending at index i and the last element is greater than its previous element 
+las[i][1] contains the longest alternating subsequence ending at index i and the last element is smaller than its previous element, then we have the following recurrence relation between them,  
+las[i][0] = Length of the longest alternating subsequence 
+                  ending at index i and last element is greater
+                  than its previous element
+
+las[i][1] = Length of the longest alternating subsequence 
+                  ending at index i and last element is smaller
+                  than its previous element
+
+Recursive Formulation:
+
+   las[i][0] = max (las[i][0], las[j][1] + 1); 
+                  for all j < i and A[j] < A[i] 
+
+
+   las[i][1] = max (las[i][1], las[j][0] + 1); 
+   
+   
+   
+   To prove the correctness of the algorithm mathematically, we need to show that it always finds a pair of numbers in the array that sum up to the target.
+
+Let A be the array of size n, sorted in ascending order, and let T be the target sum. We will use mathematical induction to prove that the algorithm always finds a pair of numbers that sum up to T.
+
+Base case: n = 2
+If n = 2, then the array A contains only two elements, say A[0] and A[1]. We check if A[0] + A[1] = T. If yes, then we have found the pair of numbers that sum up to T. If not, then such a pair does not exist in the array.
+
+Induction hypothesis:
+Assume that the algorithm always finds a pair of numbers that sum up to T for any array of size n < k, where k > 2.
+
+Induction step:
+Consider an array A of size k, sorted in ascending order, and let T be the target sum. We need to show that the algorithm always finds a pair of numbers that sum up to T.
+
+We first select the first number A[0] in the array and search for the second number T - A[0] in the remaining part of the array using binary search. If we find the number T - A[0], then we have found the pair of numbers that sum up to T.
+
+If we do not find the number T - A[0], then we remove the first element A[0] from the array and repeat the process on the remaining array of size k-1. By the induction hypothesis, the algorithm will find a pair of numbers that sum up to T in the remaining array.
+
+Thus, the algorithm always finds a pair of numbers that sum up to T for any array of size n. Therefore, the algorithm is correct.
+
+
